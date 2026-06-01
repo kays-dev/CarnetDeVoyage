@@ -10,24 +10,23 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack {
-            Color.indigo
+            Color.white
                 .ignoresSafeArea()
-                .opacity(0.3)
             
             VStack{
                 
-                ZStack{
+                VStack{
                     
-                    Image("cover")
+                    Image("paintedFlower")
                         .resizable()
                         .scaledToFit()
-                        .clipShape(.ellipse)
-                        .frame(height: 250)
-                        .opacity(0.6)
+                        .clipShape(.circle)
+                        .frame(height: 100)
+                        .opacity(0.7)
                     
-                    Text("Logbook")
+                    Text("Carnet de voyage")
                         .font(.largeTitle)
-                        .foregroundStyle(.indigo)
+                        .foregroundStyle(.black)
                         .bold()
                     
                 }
@@ -37,7 +36,7 @@ struct ContentView: View {
                     
                     Image(systemName: "star.bubble")
                         .imageScale(.large)
-                        .foregroundStyle(.orange)
+                        .foregroundStyle(.mint)
                 }
                 .padding(.top)
                 .font(.callout)
