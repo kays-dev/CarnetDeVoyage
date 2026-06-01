@@ -9,13 +9,44 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            Color.indigo
+                .ignoresSafeArea()
+                .opacity(0.3)
+            
+            VStack{
+                
+                ZStack{
+                    
+                    Image("cover")
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(.ellipse)
+                        .frame(height: 250)
+                        .opacity(0.6)
+                    
+                    Text("Logbook")
+                        .font(.largeTitle)
+                        .foregroundStyle(.indigo)
+                        .bold()
+                    
+                }
+                
+                HStack{
+                    Text("Welcome to my Swift journey !")
+                    
+                    Image(systemName: "star.bubble")
+                        .imageScale(.large)
+                        .foregroundStyle(.orange)
+                }
+                .padding(.top)
+                .font(.callout)
+                
+                Spacer()
+            }
+            .padding(.horizontal, 16)
         }
-        .padding()
+
     }
 }
 
