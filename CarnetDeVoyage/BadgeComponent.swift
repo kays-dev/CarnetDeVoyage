@@ -19,7 +19,8 @@ struct BadgeComponent: View {
         .padding(.horizontal, 16)
         .background{
             Capsule()
-                .fill(.white)
+                .fill(.white).opacity(0.8)
+
         }
 
     }

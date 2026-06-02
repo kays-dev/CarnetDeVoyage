@@ -18,6 +18,8 @@ struct CarteLieu: View {
     var etoile4 : String = "star.fill"
     var etoile5 : String = "star.fill"
     
+    var visited :  Bool = true
+    
     var body: some View {
         
         VStack{
@@ -49,7 +51,7 @@ struct CarteLieu: View {
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(
-                UnevenRoundedRectangle(bottomLeadingRadius: 16, bottomTrailingRadius: 16).fill(.black)
+                UnevenRoundedRectangle(bottomLeadingRadius: 16, bottomTrailingRadius: 16).fill(.black).opacity(0.8)
             )
         }
         .foregroundStyle(.white)
@@ -57,6 +59,7 @@ struct CarteLieu: View {
         .overlay(alignment: .topTrailing){
             BadgeComponent()
                 .padding()
+                .opacity(visited ? 1 : 0)
         }
         
         

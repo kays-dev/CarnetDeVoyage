@@ -9,39 +9,59 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack {
-            Color.white
-                .ignoresSafeArea()
-            
-            VStack{
+        NavigationStack{
+            ZStack {
+                Color.white
+                    .ignoresSafeArea()
                 
                 VStack{
                     
-                    Text("Carnet de voyage")
-                        .font(.largeTitle)
-                        .foregroundStyle(.black)
+                    VStack{
                         
+                        Text("Carnet de voyage")
+                            .font(.largeTitle)
+                            .padding(.top, 12)
+                            .foregroundStyle(.black)
+                            .background (alignment : .topTrailing){
+                                Image("paintedFlower")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: 40)
+                                    .clipShape(.circle)
+                                    .opacity(0.7)
+                            }
+                        
+                    }
                     
-                }
-                
-                HStack{
+                    Label("Welcome to my Swift journey !", systemImage: "moon.stars.circle.fill")
+                        .font(.caption)
+                        .foregroundStyle(.indigo)
                     
-                    Text("Welcome to my Swift journey !")
+                    Spacer()
                     
-                    Image(systemName: "star.bubble")
-                        .imageScale(.large)
-                        .foregroundStyle(.purple)
+                    NavigationLink(destination: Lieux()){
+                        Text("Tous les lieux")
+                            .font(.default)
+                            .padding(.vertical, 8)
+                            .frame(maxWidth: .infinity)
+                            .background(
+                                RoundedRectangle(cornerRadius: 24)
+                                    .fill(.indigo)
+                            )
+                            .foregroundStyle(.white)
+                    }
+                    
+                    Spacer()
                 }
                 .padding(.top)
                 .font(.callout)
-                
-                Spacer()
             }
             .padding(.horizontal, 16)
         }
-
     }
+    
 }
+
 
 #Preview {
     ContentView()
