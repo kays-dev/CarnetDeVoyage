@@ -14,14 +14,13 @@ struct BadgeComponent: View {
             
             Text("Visité")
         }
-        .font(.subheadline)
-        .padding(.vertical, 8)
-        .padding(.horizontal, 20)
+        .font(.caption)
+        .padding(.vertical, 4)
+        .padding(.horizontal, 16)
         .background{
             Capsule()
                 .fill(.green)
         }
-        .bold()
 
     }
 }

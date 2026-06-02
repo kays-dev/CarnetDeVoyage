@@ -8,15 +8,29 @@
 import SwiftUI
 
 struct CountryComponent: View {
+    var pays : String
+    var capitale : String
+    
     var body: some View {
-        HStack {
-            Image(systemName: "map.circle.fill")
-            Text("Pays")
+        VStack(alignment: .leading){
+            Text("\(capitale)")
+                .foregroundStyle(.primary)
+                .padding(.bottom, 4)
+                .font(.title3)
+                .bold()
+            
+            Label("\(pays)", systemImage: "map.circle.fill")
+            
         }
-        .font(.title3)
+        .padding()
+        .frame(width: 300, alignment: .leading)
+        .background(
+            UnevenRoundedRectangle(bottomLeadingRadius: 16, bottomTrailingRadius: 16)
+                .fill(.secondary)
+        )
     }
 }
 
 #Preview {
-    CountryComponent()
+    CountryComponent(pays: "Portugal", capitale: "Lisbonne")
 }
