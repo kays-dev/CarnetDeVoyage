@@ -17,17 +17,10 @@ struct ContentView: View {
                 
                 VStack{
                     
-                    Image("paintedFlower")
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(.circle)
-                        .frame(height: 100)
-                        .opacity(0.7)
-                    
                     Text("Carnet de voyage")
                         .font(.largeTitle)
                         .foregroundStyle(.black)
-                        .bold()
+                        
                     
                 }
                 

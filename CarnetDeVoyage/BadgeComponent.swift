@@ -19,7 +19,7 @@ struct BadgeComponent: View {
         .padding(.horizontal, 16)
         .background{
             Capsule()
-                .fill(.green)
+                .fill(.white)
         }
 
     }

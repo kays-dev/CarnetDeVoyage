@@ -10,7 +10,13 @@ import SwiftUI
 struct CarteLieu: View {
     var pays : String
     var icone : String
-    var capitale : String
+    var ville : String
+    
+    var etoile1 : String = "star.fill"
+    var etoile2 : String = "star.fill"
+    var etoile3 : String = "star.fill"
+    var etoile4 : String = "star.fill"
+    var etoile5 : String = "star.fill"
     
     var body: some View {
         
@@ -19,12 +25,12 @@ struct CarteLieu: View {
             Image(systemName: "\(icone)")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 80, height: 80)
+                .frame(width: 50, height: 50)
                 .padding(36)
             
             //Détails
             VStack(alignment: .leading, spacing: 4){
-                Text("\(capitale)")
+                Text("\(ville)")
                     .foregroundStyle(.primary)
                     .font(.title3)
                     .bold()
@@ -32,11 +38,11 @@ struct CarteLieu: View {
                 Label("\(pays)", systemImage: "map.circle.fill")
                 
                 HStack(spacing: 0) {
-                    Image(systemName: "star").symbolVariant(.fill)
-                    Image(systemName: "star")
-                    Image(systemName: "star")
-                    Image(systemName: "star")
-                    Image(systemName: "star")
+                    Image(systemName: "\(etoile1)")
+                    Image(systemName: "\(etoile2)")
+                    Image(systemName: "\(etoile3)")
+                    Image(systemName: "\(etoile4)")
+                    Image(systemName: "\(etoile5)")
                 }
                 .foregroundStyle(.yellow)
             }
@@ -48,10 +54,6 @@ struct CarteLieu: View {
         }
         .foregroundStyle(.white)
         .frame(maxWidth: .infinity)
-        .background(
-            RoundedRectangle(cornerRadius: 24)
-                .fill(LinearGradient(colors: [.purple, .indigo], startPoint: .topLeading, endPoint: .bottomTrailing))
-        )
         .overlay(alignment: .topTrailing){
             BadgeComponent()
                 .padding()
@@ -59,9 +61,10 @@ struct CarteLieu: View {
         
         
         
+        
     }
 }
 
 #Preview {
-    CarteLieu(pays: "Portugal", icone: "circle.badge.checkmark.fill", capitale: "Lisbonne")
+    CarteLieu(pays: "Portugal", icone: "circle.badge.checkmark.fill", ville: "Lisbonne")
 }
