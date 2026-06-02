@@ -32,11 +32,12 @@ struct ContentView: View {
                 }
                 
                 HStack{
+                    
                     Text("Welcome to my Swift journey !")
                     
                     Image(systemName: "star.bubble")
                         .imageScale(.large)
-                        .foregroundStyle(.mint)
+                        .foregroundStyle(.purple)
                 }
                 .padding(.top)
                 .font(.callout)
