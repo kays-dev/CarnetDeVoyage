@@ -15,12 +15,12 @@ struct BadgeComponent: View {
             Text("Visité")
         }
         .font(.caption)
+        .foregroundStyle(.white)
         .padding(.vertical, 4)
         .padding(.horizontal, 16)
         .background{
             Capsule()
-                .fill(.white).opacity(0.8)
-
+                .fill(.indigo).opacity(0.8)
         }
 
     }
