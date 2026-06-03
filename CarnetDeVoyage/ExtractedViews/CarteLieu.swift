@@ -8,9 +8,19 @@
 import SwiftUI
 
 struct CarteLieu: View {
+    
     let lieu : Lieu
     
-    var couleurCont : [Color]
+    var couleurCont : [Color] {
+        switch lieu.continent {
+        case "Europe": return [.blue, .teal]
+        case "Amérique": return [.red, .orange]
+        case "Asie": return [.green, .cyan]
+        case "Océanie": return [.purple, .pink]
+        case "Afrique": return [.brown, .black]
+        default: return [.indigo, .purple]
+        }
+    }
     
     var body: some View {
         
@@ -20,7 +30,7 @@ struct CarteLieu: View {
                 .scaledToFill()
                 .frame(height: 200)
                 .clipped()
-                .opacity(0.65)
+                .opacity(0.8)
             
             
             //Détails
@@ -62,12 +72,10 @@ struct CarteLieu: View {
         }
         .background(RoundedRectangle(cornerRadius: 16).fill(LinearGradient(colors: couleurCont, startPoint: .topLeading, endPoint: .bottomTrailing)))
         
-        
-        
-        
     }
 }
 
+
 #Preview {
-    CarteLieu(lieu: lieux[2], couleurCont: [.indigo, .purple])
+    CarteLieu(lieu: lieux[2])
 }

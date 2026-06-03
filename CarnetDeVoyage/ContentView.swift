@@ -39,7 +39,7 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    NavigationLink(destination: Lieux()){
+                    NavigationLink(destination: ListeLieux()){
                         Text("Tous les lieux")
                             .font(.default)
                             .padding(.vertical, 8)

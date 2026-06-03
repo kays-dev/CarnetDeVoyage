@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Lieu {
+struct Lieu : Identifiable {
     let id = UUID()
     
     let image : String = "cover"
