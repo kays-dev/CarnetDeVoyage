@@ -28,7 +28,7 @@ struct CarteLieu: View {
             
             Image(lieu.image)
                 .resizable()
-                .scaledToFill()
+                .scaledToFit()
                 .clipShape(.rect(topLeadingRadius: 16, topTrailingRadius: 16))
                 .opacity(1)
 

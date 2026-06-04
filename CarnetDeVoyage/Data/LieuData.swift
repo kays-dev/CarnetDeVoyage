@@ -10,21 +10,21 @@ import Foundation
 struct Lieu : Identifiable {
     let id = UUID()
     
-    let image : String = "cover"
+    var image : String = "cover"
     let icone : String = "square.fill"
     
     let pays : String
     let ville : String
     let continent : String
     
-    let note : Int
+    var note : Int
     
     var visited : Bool = false
 }
 
 var mockData = [
  Lieu(pays: "Pays-Bas", ville: "Amsterdam", continent: "Europe", note: 4),
- Lieu(pays: "Espagne", ville: "Barcelone", continent: "Europe", note: 2),
+ Lieu(image: "barcelone",pays: "Espagne", ville: "Barcelone", continent: "Europe", note: 2),
  Lieu(pays: "Belgique", ville: "Bruges", continent: "Europe", note: 5, visited: true),
  Lieu(pays: "Belgique", ville: "Bruxelles", continent: "Europe", note: 4, visited: true),
  Lieu(pays: "Allemagne", ville: "Düsseldorf", continent: "Europe", note: 5, visited: true),

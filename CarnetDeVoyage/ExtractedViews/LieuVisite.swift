@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct LieuVisite: View {
-    var lieu : Lieu
+    @State private var lieu : Lieu
+    
+    @State private var noteLieu : Double = 0
     
     var couleurCont : [Color] {
         switch lieu.continent {
@@ -21,30 +23,69 @@ struct LieuVisite: View {
         }
     }
     
+    var trackNumber : Int
+    @State var estVisite : Bool = false
     
     var body: some View {
-        HStack(spacing: 20){
+        HStack(spacing: 16){
             
-            
-            
-            ZStack {
-                Image(systemName: "\(lieu.icone)")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 80)
-                    .clipShape(Circle())
+            Text("0\(trackNumber)")
+                .font(.callout)
+            HStack(spacing: -10){
                 
-                Circle()
-                    .frame(width: 30)
-                    .foregroundStyle(.white)
-            }
-
-            Text("\(lieu.ville)")
+                //Disque
+                ZStack{
+                    Circle()
+                        .fill(.white)
+                        .frame(width: 80, alignment: .leading)
+                        .padding(.leading, 10)
+                    
+                    Image("\(lieu.image)")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 80)
+                        .clipShape(Circle())
+                    
+                    Circle()
+                        .frame(width: 20)
+                        .foregroundStyle(.black)
+                    
+                    Circle()
+                        .frame(width: 10)
+                        .foregroundStyle(.white)
+                }
+                
+                //Titre (lieu et nb d'étoiles)
+                HStack{
+                    VStack(alignment: .leading, spacing: 0){
+                        Text("\(lieu.ville)")
+                        
+                        Text("\(lieu.pays)")
+                            .font(.callout)
+                            .opacity(0.7)
+                    }
+                    
+                    Spacer()
+                    Image(systemName: "star")
+                    
+                    //                    Slider(value: $noteLieu, in: 0...5, step: 1) {
+                    //
+                    //                    }
+                    
+                }
                 .padding(.vertical, 8)
-                .padding(.horizontal, 24)
-                .background(
-                    Capsule().fill(LinearGradient(colors: couleurCont, startPoint: .topLeading, endPoint: .bottomTrailing))
-                )
+                .padding(.horizontal, 16)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            
+            
+            //Ajout à la playlist (lieux visités)
+            Button{
+                lieu.visited.toggle()
+            } label : {
+                Image(systemName: "text.badge.plus")
+            }
+            
         }
         .font(.title2)
         .foregroundStyle(.black)
@@ -52,5 +93,5 @@ struct LieuVisite: View {
 }
 
 #Preview {
-    LieuVisite(lieu: mockData[1])
+    LieuVisite(lieu: mockData[1], trackNumber: 1)
 }
