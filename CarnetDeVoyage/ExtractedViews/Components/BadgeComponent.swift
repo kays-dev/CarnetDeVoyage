@@ -8,24 +8,27 @@
 import SwiftUI
 
 struct BadgeComponent: View {
+    var dejaVisite : Bool = true
+    
     var body: some View {
         HStack {
-            Image(systemName: "checkmark.circle.fill")
+            Image(systemName: dejaVisite ? "checkmark.circle.fill" : "circle" )
             
             Text("Visité")
         }
         .font(.callout)
-        .foregroundStyle(.white)
-        .padding(.vertical, 8)
+        .bold()
+        .foregroundStyle(dejaVisite ? .white  :  .indigo)
+        .padding(.vertical, 4)
         .padding(.horizontal, 16)
         .background{
             Capsule()
-                .fill(.indigo).opacity(0.8)
+                .fill(dejaVisite ? .indigo :  .brown).opacity(dejaVisite ? 0.8 : 0.3)
         }
 
     }
 }
 
 #Preview {
-    BadgeComponent()
+    BadgeComponent(dejaVisite: false)
 }

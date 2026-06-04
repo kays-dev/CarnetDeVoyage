@@ -11,6 +11,7 @@ struct Lieu : Identifiable {
     let id = UUID()
     
     let image : String = "cover"
+    let icone : String = "square.fill"
     
     let pays : String
     let ville : String
@@ -18,10 +19,10 @@ struct Lieu : Identifiable {
     
     let note : Int
     
-    var visited :  Bool = false
+    var visited : Bool = false
 }
 
-var lieux : [Lieu] = [
+var mockData = [
  Lieu(pays: "Pays-Bas", ville: "Amsterdam", continent: "Europe", note: 4),
  Lieu(pays: "Espagne", ville: "Barcelone", continent: "Europe", note: 2),
  Lieu(pays: "Belgique", ville: "Bruges", continent: "Europe", note: 5, visited: true),

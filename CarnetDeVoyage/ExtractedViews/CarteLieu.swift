@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CarteLieu: View {
+    @State var lieu : Lieu
     
-    let lieu : Lieu
     
     var couleurCont : [Color] {
         switch lieu.continent {
@@ -25,13 +25,13 @@ struct CarteLieu: View {
     var body: some View {
         
         VStack (spacing: 0){
+            
             Image(lieu.image)
                 .resizable()
                 .scaledToFill()
-                .frame(height: 200)
-                .clipped()
-                .opacity(0.8)
-            
+                .clipShape(.rect(topLeadingRadius: 16, topTrailingRadius: 16))
+                .opacity(1)
+
             
             //Détails
             HStack(alignment: .lastTextBaseline){
@@ -41,8 +41,10 @@ struct CarteLieu: View {
                         .font(.title3)
                         .bold()
                     
-                    Label("\(lieu.pays)", systemImage: "map.circle.fill")
-                        .padding(.bottom, 8)
+                    HStack(spacing: 4) {
+                        Image(systemName: "map.circle.fill")
+                        Text("\(lieu.pays)")
+                    }
                 }
                 
                 Spacer()
@@ -56,6 +58,7 @@ struct CarteLieu: View {
                     }
                 }
                 .foregroundStyle(.yellow)
+                .font(.caption2)
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -64,11 +67,16 @@ struct CarteLieu: View {
             )
         }
         .foregroundStyle(.white)
-        .frame(maxWidth: .infinity)
+        .frame(width: 300)
         .overlay(alignment: .topTrailing){
-            BadgeComponent()
-                .padding()
-                .opacity(lieu.visited ? 1 : 0)
+            Button {
+                lieu.visited.toggle()
+            } label: {
+                BadgeComponent(dejaVisite: lieu.visited)
+                    .padding()
+            }
+
+
         }
         .background(RoundedRectangle(cornerRadius: 16).fill(LinearGradient(colors: couleurCont, startPoint: .topLeading, endPoint: .bottomTrailing)))
         
@@ -77,5 +85,5 @@ struct CarteLieu: View {
 
 
 #Preview {
-    CarteLieu(lieu: lieux[2])
+    CarteLieu(lieu: mockData[1])
 }
