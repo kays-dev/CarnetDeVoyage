@@ -8,24 +8,21 @@
 import SwiftUI
 
 struct BadgeComponent: View {
-    var dejaVisite : Bool = true
+    @State var dejaVisite : Bool
     
     var body: some View {
-        HStack {
-            Image(systemName: dejaVisite ? "checkmark.circle.fill" : "circle" )
-            
-            Text("Visité")
-        }
-        .font(.callout)
-        .bold()
-        .foregroundStyle(dejaVisite ? .white  :  .indigo)
-        .padding(.vertical, 4)
-        .padding(.horizontal, 16)
-        .background{
-            Capsule()
-                .fill(dejaVisite ? .indigo :  .brown).opacity(dejaVisite ? 0.8 : 0.3)
-        }
-
+        
+        Toggle("Visité", systemImage: dejaVisite ? "checkmark.circle.fill" : "checkmark.circle" , isOn: $dejaVisite)
+            .toggleStyle(.button)
+            .font(.callout)
+            .tint(.indigo)
+            .foregroundStyle(.indigo)
+            .background{
+                Capsule()
+                    .stroke(.indigo, lineWidth: 1)
+                    
+            }
+        
     }
 }
 

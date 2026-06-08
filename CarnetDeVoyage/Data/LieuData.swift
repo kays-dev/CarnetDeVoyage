@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Lieu : Identifiable {
+struct Lieu : Identifiable, Hashable {
     let id = UUID()
     
     var image : String = "cover"
@@ -22,7 +22,7 @@ struct Lieu : Identifiable {
     var visited : Bool = false
 }
 
-var mockData = [
+let mockData = [
  Lieu(pays: "Pays-Bas", ville: "Amsterdam", continent: "Europe", note: 4),
  Lieu(image: "barcelone",pays: "Espagne", ville: "Barcelone", continent: "Europe", note: 2),
  Lieu(pays: "Belgique", ville: "Bruges", continent: "Europe", note: 5, visited: true),

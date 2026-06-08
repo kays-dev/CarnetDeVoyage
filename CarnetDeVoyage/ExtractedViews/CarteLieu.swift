@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CarteLieu: View {
     @State var lieu : Lieu
-    
+    @State var showPop : Bool = false
     
     var couleurCont : [Color] {
         switch lieu.continent {
@@ -24,62 +24,71 @@ struct CarteLieu: View {
     
     var body: some View {
         
-        VStack (spacing: 0){
+        HStack(alignment: .center,spacing: 8){
             
-            Image(lieu.image)
-                .resizable()
-                .scaledToFit()
-                .clipShape(.rect(topLeadingRadius: 16, topTrailingRadius: 16))
-                .opacity(1)
+            Button {
+                showPop = true
+            } label: {
+                Image(systemName: "star")
+                    .symbolVariant(.fill)
+                    .foregroundStyle(.indigo)
+            }
+            .popover(isPresented: $showPop){
+                HStack(spacing: 0) {
+                    ForEach(0..<lieu.note){ i in
+                        Image(systemName: "star").symbolVariant(.fill)
 
-            
-            //Détails
-            HStack(alignment: .lastTextBaseline){
+                    }
+                    ForEach(0..<(5 - lieu.note)){ i in
+                        Image(systemName: "star")
+                    }
+                }
+                .contentShape(.rect)
+                .foregroundStyle(.yellow)
+                .font(.callout)
+                .padding()
+                .presentationCompactAdaptation(.popover)
+            }
+            .contentShape(.circle)
+
+            HStack(spacing: 12){
+                Image(lieu.image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity,
+                           minHeight: 0,
+                           maxHeight: .infinity
+                    )
+                    .aspectRatio(1/1 , contentMode: .fit)
+                    .clipShape(.rect(cornerRadius: 16))
+                    .opacity(1)
+                
+                
                 VStack(alignment: .leading, spacing: 4){
                     Text("\(lieu.ville)")
                         .foregroundStyle(.primary)
                         .font(.title3)
                         .bold()
                     
-                    HStack(spacing: 4) {
-                        Image(systemName: "map.circle.fill")
-                        Text("\(lieu.pays)")
-                    }
+                    Text("\(lieu.pays)")
+                        .foregroundStyle(.primary)
+                        .font(.callout)
+                        .lineLimit(1)
                 }
-                
-                Spacer()
-                
-                HStack(spacing: 0) {
-                    ForEach(0..<lieu.note){ i in
-                        Image(systemName: "star").symbolVariant(.fill)
-                    }
-                    ForEach(0..<(5 - lieu.note)){ i in
-                        Image(systemName: "star")
-                    }
-                }
-                .foregroundStyle(.yellow)
-                .font(.caption2)
             }
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(
-                UnevenRoundedRectangle(bottomLeadingRadius: 16, bottomTrailingRadius: 16).fill(.black).opacity(0.8)
-            )
-        }
-        .foregroundStyle(.white)
-        .frame(width: 300)
-        .overlay(alignment: .topTrailing){
+            
+            Spacer()
+            
             Button {
                 lieu.visited.toggle()
             } label: {
                 BadgeComponent(dejaVisite: lieu.visited)
-                    .padding()
             }
 
-
         }
-        .background(RoundedRectangle(cornerRadius: 16).fill(LinearGradient(colors: couleurCont, startPoint: .topLeading, endPoint: .bottomTrailing)))
-        
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(height: 70)
     }
 }
 
