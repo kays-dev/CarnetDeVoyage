@@ -107,8 +107,6 @@ struct NouveauLieu: View {
                         .opacity(0.1)
                 }
                 
-                
-                
                 HStack(alignment: .center) {
                     Toggle("Visité", systemImage: dejaVisite ? "checkmark.circle.fill" : "checkmark.circle" , isOn: $dejaVisite)
                         .toggleStyle(.button)
@@ -134,7 +132,7 @@ struct NouveauLieu: View {
                             }
                     }
                 }
-                .padding()
+                .padding(.horizontal)
                 
                 Spacer()
                 
