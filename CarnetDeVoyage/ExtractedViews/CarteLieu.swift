@@ -8,19 +8,8 @@
 import SwiftUI
 
 struct CarteLieu: View {
-    @State var lieu : Lieu
+    @Binding var lieu : Lieu
     @State var showPop : Bool = false
-    
-    var couleurCont : [Color] {
-        switch lieu.continent {
-        case "Europe": return [.blue, .teal]
-        case "Amérique": return [.red, .orange]
-        case "Asie": return [.green, .cyan]
-        case "Océanie": return [.purple, .pink]
-        case "Afrique": return [.brown, .black]
-        default: return [.indigo, .purple]
-        }
-    }
     
     var body: some View {
         
@@ -32,67 +21,85 @@ struct CarteLieu: View {
                 Image(systemName: "star")
                     .symbolVariant(.fill)
                     .foregroundStyle(.indigo)
+                    .opacity(0.8)
             }
             .popover(isPresented: $showPop){
                 HStack(spacing: 0) {
-                    ForEach(0..<lieu.note){ i in
-                        Image(systemName: "star").symbolVariant(.fill)
-
-                    }
-                    ForEach(0..<(5 - lieu.note)){ i in
-                        Image(systemName: "star")
+                    ForEach(1...5, id: \.self) { i in
+                        Image(systemName: i <= lieu.note ? "star.fill" : "star")
+                            .font(.callout)
                     }
                 }
                 .contentShape(.rect)
-                .foregroundStyle(.yellow)
+                .foregroundStyle(.indigo)
                 .font(.callout)
                 .padding()
                 .presentationCompactAdaptation(.popover)
             }
-            .contentShape(.circle)
-
-            HStack(spacing: 12){
-                Image(lieu.image)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(minWidth: 0,
-                           maxWidth: .infinity,
-                           minHeight: 0,
-                           maxHeight: .infinity
-                    )
-                    .aspectRatio(1/1 , contentMode: .fit)
-                    .clipShape(.rect(cornerRadius: 16))
-                    .opacity(1)
-                
-                
-                VStack(alignment: .leading, spacing: 4){
-                    Text("\(lieu.ville)")
-                        .foregroundStyle(.primary)
-                        .font(.title3)
-                        .bold()
-                    
-                    Text("\(lieu.pays)")
-                        .foregroundStyle(.primary)
-                        .font(.callout)
-                        .lineLimit(1)
+            
+            Image(lieu.image)
+                .resizable()
+                .scaledToFill()
+                .frame(minWidth: 0,
+                       maxWidth: .infinity,
+                       minHeight: 0,
+                       maxHeight: .infinity
+                )
+                .aspectRatio(1/1 , contentMode: .fit)
+                .clipShape(.rect(cornerRadius: 16))
+                .overlay{
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(.secondary)
+                        .opacity(0.1)
                 }
+            
+            VStack(alignment: .leading, spacing: 4){
+                Text("\(lieu.ville)")
+                    .font(.custom("Gill Sans", size: 20, relativeTo: .title2))
+                
+                Text("\(lieu.pays)")
+                    .font(.custom("Gill Sans", size: 16, relativeTo: .callout))
+                    .lineLimit(1)
+                    .foregroundStyle(.indigo)
+                    .opacity(0.8)
+                
             }
+            .padding(.leading, 4)
             
             Spacer()
             
             Button {
                 lieu.visited.toggle()
             } label: {
-                BadgeComponent(dejaVisite: lieu.visited)
+                Toggle("Visité", systemImage: lieu.visited ? "checkmark.circle.fill" : "checkmark.circle" , isOn: $lieu.visited)
+                    .toggleStyle(.button)
+                    .font(.custom("Gill Sans", size: 18, relativeTo: .callout))
+                    .foregroundStyle(.indigo.opacity(0.8))
+                    .tint(.indigo)
+                    .background{
+                        Capsule()
+                            .stroke(.indigo.opacity(0.8), lineWidth: 1)
+                        
+                    }
             }
-
+            
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .frame(height: 70)
+        
     }
 }
 
 
 #Preview {
-    CarteLieu(lieu: mockData[1])
+    struct PreviewVar : View {
+        @State private var lieux = mockData.sorted{ $0.ville.lowercased() < $1.ville.lowercased() }
+        
+        var body : some View {
+            
+            CarteLieu(lieu: $lieux[1])
+        }
+    }
+    
+    return PreviewVar()
 }
