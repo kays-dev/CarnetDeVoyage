@@ -171,20 +171,22 @@ struct AlbumLieu: View {
                                         }
                                         appliquerFiltres()
                                     }
-                                    .swipeActions(edge: .trailing) {
-                                        if let index = lieux.firstIndex(where: { $0.id == lieu.id }) {
-                                            
-                                            Button("Supprimer",role: .destructive) {
-                                                resultats.remove(at: index)
-                                                appliquerFiltres()
-                                            }
-                                        }
-                                    }
-                                
+                      
                             }
+
                             Divider()
                                 .padding(.leading, 112)
                         }
+                        .contextMenu{
+                                Button(role: .destructive) {
+                                    lieux.removeAll{ $0.id == $lieu.id }
+                                    
+                                    appliquerFiltres()
+                                } label : {
+                                    Label("Supprimer", systemImage: "trash")
+                                }
+                        }
+                        
                     }
                     .padding(.horizontal)
                     .searchable(
