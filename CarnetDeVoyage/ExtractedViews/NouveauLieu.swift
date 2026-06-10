@@ -14,6 +14,7 @@ struct NouveauLieu: View {
     @State private var paysNouveau = ""
     @State private var continentNouveau = ""
     @State private var detailNouveau = ""
+    @State private var dejaVisite = false
     @State private var note = 0
     
     @State private var showingImagePicker = false
@@ -38,7 +39,7 @@ struct NouveauLieu: View {
                 
                 Text("Créer un nouveau lieu")
                     .font(.custom("Futura", size: 24, relativeTo: .title3))
-
+                
                 
                 Button {
                     showingImagePicker = true
@@ -91,7 +92,7 @@ struct NouveauLieu: View {
                     
                     TextField("Détail du lieu", text: $detailNouveau)
                         .textFieldStyle(.plain)
-                        
+                    
                 }
                 .font(.custom("Gill Sans", size: 16, relativeTo: .callout))
                 .foregroundStyle(.primary)
@@ -106,7 +107,20 @@ struct NouveauLieu: View {
                         .opacity(0.1)
                 }
                 
-                HStack {
+                
+                
+                HStack(alignment: .center) {
+                    Toggle("Visité", systemImage: dejaVisite ? "checkmark.circle.fill" : "checkmark.circle" , isOn: $dejaVisite)
+                        .toggleStyle(.button)
+                        .font(.custom("Gill Sans", size: 18, relativeTo: .callout))
+                        .foregroundStyle(.indigo.opacity(0.8))
+                        .tint(.indigo)
+                        .background{
+                            Capsule()
+                                .stroke(.indigo.opacity(0.8), lineWidth: 1)
+                            
+                        }
+                    
                     Spacer()
                     
                     ForEach(1...5, id: \.self) { i in
@@ -119,14 +133,13 @@ struct NouveauLieu: View {
                                 }
                             }
                     }
-                    
-                    Spacer()
                 }
+                .padding()
                 
                 Spacer()
                 
                 Button("Ajouter") {
-                    lieux.insert(Lieu(image :  inputImage?.toPngString() ?? "cover", pays: paysNouveau, ville: nouveau, continent: continentNouveau, detail: detailNouveau, note: note), at: 0)
+                    lieux.insert(Lieu(image :  inputImage?.toPngString() ?? "cover", pays: paysNouveau, ville: nouveau, continent: continentNouveau, detail: detailNouveau, note: note, visited: dejaVisite), at: 0)
                     
                     
                     nouveau = ""
@@ -144,7 +157,6 @@ struct NouveauLieu: View {
                     Capsule()
                         .fill(.indigo)
                         .shadow(color: .indigo.opacity(0.2), radius: 4, x: 0, y: 0)
-                        .frame(width: .infinity)
                 }
                 .foregroundStyle(.white)
                 
