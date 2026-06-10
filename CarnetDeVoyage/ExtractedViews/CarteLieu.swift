@@ -37,21 +37,39 @@ struct CarteLieu: View {
                 .presentationCompactAdaptation(.popover)
             }
             
-            Image(lieu.image)
-                .resizable()
-                .scaledToFill()
-                .frame(minWidth: 0,
-                       maxWidth: .infinity,
-                       minHeight: 0,
-                       maxHeight: .infinity
-                )
-                .aspectRatio(1/1 , contentMode: .fit)
-                .clipShape(.rect(cornerRadius: 16))
-                .overlay{
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(.secondary)
-                        .opacity(0.1)
-                }
+            if let image = lieu.image.toImage() {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity,
+                           minHeight: 0,
+                           maxHeight: .infinity
+                    )
+                    .aspectRatio(1/1 , contentMode: .fit)
+                    .clipShape(.rect(cornerRadius: 16))
+                    .overlay{
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(.secondary)
+                            .opacity(0.1)
+                    }
+            } else {
+                Image(lieu.image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity,
+                           minHeight: 0,
+                           maxHeight: .infinity
+                    )
+                    .aspectRatio(1/1 , contentMode: .fit)
+                    .clipShape(.rect(cornerRadius: 16))
+                    .overlay{
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(.secondary)
+                            .opacity(0.1)
+                    }
+            }
             
             VStack(alignment: .leading, spacing: 4){
                 Text("\(lieu.ville)")
@@ -88,8 +106,8 @@ struct CarteLieu: View {
         .frame(height: 70)
         
     }
+    
 }
-
 
 #Preview {
     struct PreviewVar : View {

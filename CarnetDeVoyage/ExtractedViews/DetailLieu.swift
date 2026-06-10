@@ -17,58 +17,114 @@ struct DetailLieu: View {
             
             VStack(alignment: .leading, spacing: 16) {
                 VStack{
-                    Image(lieu.image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(minWidth: 0,
-                               maxWidth: .infinity,
-                               minHeight: 0,
-                               maxHeight: .infinity
-                        )
-                        .aspectRatio(1/1 , contentMode: .fill)
-                        .clipShape(.rect(cornerRadius: 16))
-                        .overlay(alignment: .bottomLeading) {
-                            VStack(alignment: .leading){
-                                Text(lieu.ville)
-                                    .font(.custom("Futura", size: 24, relativeTo: .title3))
-                                
-                                
-                                Text(!lieu.pays.isEmpty ? "\(lieu.pays), \(lieu.continent)" : "")
-                                    .font(.custom("Gill Sans", size: 20, relativeTo: .title3))
-                                    .foregroundStyle(.indigo)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding()
-                            .background(
-                                ZStack{
-                                    UnevenRoundedRectangle(bottomLeadingRadius: 16, bottomTrailingRadius: 16, topTrailingRadius: 100)
-                                        .fill(.white)
-                                        .opacity(0.9)
-                                    UnevenRoundedRectangle(bottomLeadingRadius: 16, bottomTrailingRadius: 16, topTrailingRadius: 100)
-                                        .fill(.brown)
-                                        .opacity(0.2)
-                                }
-                                    .opacity(0.8)
+                    
+                    if let image = lieu.image.toImage(){
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(minWidth: 0,
+                                   maxWidth: .infinity,
+                                   minHeight: 0,
+                                   maxHeight: .infinity
                             )
-                        }
-                        .overlay(alignment: .topTrailing) {
-                            ZStack{
-                                UnevenRoundedRectangle(bottomLeadingRadius: 100, topTrailingRadius: 16)
-                                    .fill(.white.opacity(0.9))
-                                    .stroke(.indigo, lineWidth : lieu.visited ? 0 : 1)
-                                
-                                UnevenRoundedRectangle(bottomLeadingRadius: 100, topTrailingRadius: 16)
-                                    .fill(lieu.visited ? .indigo : .brown.opacity(0.2))
-                                
-                                
-                                HStack{
-                                    Image(systemName: "checkmark.circle.fill")
+                            .aspectRatio(1/1 , contentMode: .fill)
+                            .clipShape(.rect(cornerRadius: 16))
+                            .overlay(alignment: .bottomLeading) {
+                                VStack(alignment: .leading){
+                                    Text(lieu.ville)
+                                        .font(.custom("Futura", size: 24, relativeTo: .title3))
+                                    
+                                    
+                                    Text(!lieu.pays.isEmpty ? "\(lieu.pays), \(lieu.continent)" : "")
+                                        .font(.custom("Gill Sans", size: 20, relativeTo: .title3))
+                                        .foregroundStyle(.indigo)
                                 }
-                                .padding([.leading, .bottom], 4)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding()
+                                .background(
+                                    ZStack{
+                                        UnevenRoundedRectangle(bottomLeadingRadius: 16, bottomTrailingRadius: 16, topTrailingRadius: 100)
+                                            .fill(.white)
+                                            .opacity(0.9)
+                                        UnevenRoundedRectangle(bottomLeadingRadius: 16, bottomTrailingRadius: 16, topTrailingRadius: 100)
+                                            .fill(.brown)
+                                            .opacity(0.2)
+                                    }
+                                        .opacity(0.8)
+                                )
                             }
-                            .foregroundStyle(lieu.visited ? .white : .indigo)
-                            .padding([.leading, .bottom], 280)
-                        }
+                            .overlay(alignment: .topTrailing) {
+                                ZStack{
+                                    UnevenRoundedRectangle(bottomLeadingRadius: 100, topTrailingRadius: 16)
+                                        .fill(.white.opacity(0.9))
+                                        .stroke(.indigo, lineWidth : lieu.visited ? 0 : 1)
+                                    
+                                    UnevenRoundedRectangle(bottomLeadingRadius: 100, topTrailingRadius: 16)
+                                        .fill(lieu.visited ? .indigo : .brown.opacity(0.2))
+                                    
+                                    
+                                    HStack{
+                                        Image(systemName: "checkmark.circle.fill")
+                                    }
+                                    .padding([.leading, .bottom], 4)
+                                }
+                                .foregroundStyle(lieu.visited ? .white : .indigo)
+                                .padding([.leading, .bottom], 280)
+                            }
+                    } else {
+                        Image(lieu.image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(minWidth: 0,
+                                   maxWidth: .infinity,
+                                   minHeight: 0,
+                                   maxHeight: .infinity
+                            )
+                            .aspectRatio(1/1 , contentMode: .fill)
+                            .clipShape(.rect(cornerRadius: 16))
+                            .overlay(alignment: .bottomLeading) {
+                                VStack(alignment: .leading){
+                                    Text(lieu.ville)
+                                        .font(.custom("Futura", size: 24, relativeTo: .title3))
+                                    
+                                    
+                                    Text(!lieu.pays.isEmpty ? "\(lieu.pays), \(lieu.continent)" : "")
+                                        .font(.custom("Gill Sans", size: 20, relativeTo: .title3))
+                                        .foregroundStyle(.indigo)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding()
+                                .background(
+                                    ZStack{
+                                        UnevenRoundedRectangle(bottomLeadingRadius: 16, bottomTrailingRadius: 16, topTrailingRadius: 100)
+                                            .fill(.white)
+                                            .opacity(0.9)
+                                        UnevenRoundedRectangle(bottomLeadingRadius: 16, bottomTrailingRadius: 16, topTrailingRadius: 100)
+                                            .fill(.brown)
+                                            .opacity(0.2)
+                                    }
+                                        .opacity(0.8)
+                                )
+                            }
+                            .overlay(alignment: .topTrailing) {
+                                ZStack{
+                                    UnevenRoundedRectangle(bottomLeadingRadius: 100, topTrailingRadius: 16)
+                                        .fill(.white.opacity(0.9))
+                                        .stroke(.indigo, lineWidth : lieu.visited ? 0 : 1)
+                                    
+                                    UnevenRoundedRectangle(bottomLeadingRadius: 100, topTrailingRadius: 16)
+                                        .fill(lieu.visited ? .indigo : .brown.opacity(0.2))
+                                    
+                                    
+                                    HStack{
+                                        Image(systemName: "checkmark.circle.fill")
+                                    }
+                                    .padding([.leading, .bottom], 4)
+                                }
+                                .foregroundStyle(lieu.visited ? .white : .indigo)
+                                .padding([.leading, .bottom], 280)
+                            }
+                    }
                     
                 }
                 .aspectRatio(1/1 , contentMode: .fit)
@@ -109,7 +165,7 @@ struct DetailLieu: View {
                     }
                 }
                 .padding(.horizontal)
-
+                
             }
             .navigationTitle("Détail - \(lieu.ville)")
             .padding(.horizontal, 30)

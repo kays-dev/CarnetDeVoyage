@@ -171,6 +171,15 @@ struct AlbumLieu: View {
                                         }
                                         appliquerFiltres()
                                     }
+                                    .swipeActions(edge: .trailing) {
+                                        if let index = lieux.firstIndex(where: { $0.id == lieu.id }) {
+                                            
+                                            Button("Supprimer",role: .destructive) {
+                                                resultats.remove(at: index)
+                                                appliquerFiltres()
+                                            }
+                                        }
+                                    }
                                 
                             }
                             Divider()

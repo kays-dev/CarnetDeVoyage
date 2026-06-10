@@ -137,7 +137,7 @@ struct NouveauLieu: View {
                 Spacer()
                 
                 Button("Ajouter") {
-                    lieux.insert(Lieu(image :  inputImage?.toPngString() ?? "cover", pays: paysNouveau, ville: nouveau, continent: continentNouveau, detail: detailNouveau, note: note, visited: dejaVisite), at: 0)
+                    lieux.insert(Lieu(image :  inputImage?.toJpegString(compressionQuality: 0.8) ?? "cover", pays: paysNouveau, ville: nouveau, continent: continentNouveau, detail: detailNouveau, note: note, visited: dejaVisite), at: 0)
                     
                     
                     nouveau = ""
@@ -177,18 +177,6 @@ struct NouveauLieu: View {
         }
     }
     
-}
-
-extension UIImage {
-    func toPngString() -> String? {
-        let data = self.pngData()
-        return data?.base64EncodedString(options: .endLineWithLineFeed)
-    }
-    
-    func toJpegString(compressionQuality cq: CGFloat) -> String? {
-        let data = self.jpegData(compressionQuality: cq)
-        return data?.base64EncodedString(options: .endLineWithLineFeed)
-    }
 }
 
 #Preview {
