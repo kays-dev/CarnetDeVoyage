@@ -111,6 +111,7 @@ struct DetailLieu: View {
                 .padding(.horizontal)
 
             }
+            .navigationTitle("Détail - \(lieu.ville)")
             .padding(.horizontal, 30)
             .foregroundStyle(.accent)
             
